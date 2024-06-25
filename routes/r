@@ -1,0 +1,21 @@
+Route::middleware(['auth', 'verified'])->group(
+    function () {
+        Route::controller(RouterController::class)->group(function () {
+            Route::get('router', 'index')->name('router');
+            Route::post('router', 'store')->name('router.store');
+            Route::get('router/create', 'create')->name('router.create');
+            Route::post('router/use/{index}', 'useRouter')->name('router.use');
+            Route::get('router/edit/{index}', 'edit')->name('router.edit');
+            Route::put('router/update/{index}', 'update')->name('router.update');
+            Route::delete('router/delete/{index}', 'delete')->name('router.delete');
+        });
+        Route::controller(HotspotController::class)->group(function () {
+            Route::get('hotspot/user', 'index')->name('hotspot.user');
+            Route::get(
+                'hotspot/user/create',
+                'create'
+            )->name('hotspot.user.create');
+            Route::post('hotspot/user', 'store')->name('hotspot.user.store');
+        });
+    }
+);
